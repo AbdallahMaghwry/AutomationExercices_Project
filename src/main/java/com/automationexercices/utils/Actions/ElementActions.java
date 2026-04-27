@@ -93,7 +93,7 @@ public class ElementActions {
     public void scrollToElementJS(By locator) {
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript(""" 
-                        arguments[0].scrollIntoView({behaviour:"auto",block:"center",inline:"center"});""", findElement(locator));
+                        arguments[0].scrollIntoView({behavior:"auto",block:"center",inline:"center"});""", findElement(locator));
     }
 
     public void uploadFile(By locator ,String filepath){
