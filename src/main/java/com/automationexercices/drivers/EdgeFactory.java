@@ -41,7 +41,7 @@ public class EdgeFactory extends AbstractDriver{
 
        switch (PropertyReader.GetProperty("executionType"))
        {
-           case "LocalHeadless"->options.addArguments("--headless=new");
+           case "LocalHeadless"-> options.addArguments("--headless=new");
            case "Remote"->
            {
                options.addArguments("--disable-gpu");

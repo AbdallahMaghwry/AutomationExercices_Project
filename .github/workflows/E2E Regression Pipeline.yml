@@ -27,16 +27,16 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu' # See 'Supported distributions' for available options
-          java-version: '17'
+          java-version: '21'
 
       - name: setup maven
         uses: stCarolas/setup-maven@v5
         with:
-          maven-version: 3.9.9
+          maven-version: 3.9.12
 
       - name: Running Tests
         continue-on-error: true
-        run: mvn -Dtest="${TARGET}" -DexecutionType="LocalHeadless"  -DbrowserType="Chrome" clean test
+        run: mvn -Dtest="${TARGET}" -DexecutionType="LocalHeadless" -Dextensions="disabled" -DbrowserType="Chrome" clean test
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
@@ -65,7 +65,7 @@ jobs:
 
       - name: Running Tests
         continue-on-error: true
-        run: mvn -Dtest="${TARGET}" -DexecutionType="LocalHeadless"  -DbrowserType="Edge" clean test
+        run: mvn -Dtest="${TARGET}" -DexecutionType="LocalHeadless" -Dextensions="enabled" -DbrowserType="Edge" clean test
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4

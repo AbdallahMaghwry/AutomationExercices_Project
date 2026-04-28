@@ -2,6 +2,7 @@ package com.automationexercices.utils.Actions;
 
 import com.automationexercices.utils.Logs.LogsManager;
 import com.automationexercices.utils.WaitManager;
+import com.automationexercices.utils.dataReader.PropertyReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 
@@ -59,21 +60,23 @@ public class BrowserActions {
     }
     //close extension tab
     public void closeExtensionTab() {
-        String currentWindowHandle = driver.getWindowHandle(); //0 1
-        waitManager.FluentWait().until(
-                d ->
-                {
-                    return d.getWindowHandles().size() > 1; //wait until extension tab is opened
-                }
-        );
-        for (String windowHandle : driver.getWindowHandles()) //extension tab is opened
-        {
-            if (!windowHandle.equals(currentWindowHandle))
-                driver.switchTo().window(windowHandle).close(); //close the extension tab
+        if (PropertyReader.GetProperty("extensions").equalsIgnoreCase("enabled")) {
+            String currentWindowHandle = driver.getWindowHandle(); //0 1
+            waitManager.FluentWait().until(
+                    d ->
+                    {
+                        return d.getWindowHandles().size() > 1; //wait until extension tab is opened
+                    }
+            );
+            for (String windowHandle : driver.getWindowHandles()) //extension tab is opened
+            {
+                if (!windowHandle.equals(currentWindowHandle))
+                    driver.switchTo().window(windowHandle).close(); //close the extension tab
+            }
+            driver.switchTo().window(currentWindowHandle); //switch back to the main window
+            LogsManager.Info("Extension tab closed");
         }
-        driver.switchTo().window(currentWindowHandle); //switch back to the main window
-        LogsManager.Info("Extension tab closed");
-    }
 
+    }
 
 }

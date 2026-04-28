@@ -21,10 +21,11 @@ public class ChromeFactory extends AbstractDriver{
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-infobars");
-        options.addExtensions(haramBlurExtension);
         options.setAcceptInsecureCerts(true);
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
+        if (PropertyReader.GetProperty("extensions").equalsIgnoreCase("enabled"))
+            options.addExtensions(haramBlurExtension);
         switch (PropertyReader.GetProperty("executionType"))
         {
             case "LocalHeadless"->options.addArguments("--headless=new");
