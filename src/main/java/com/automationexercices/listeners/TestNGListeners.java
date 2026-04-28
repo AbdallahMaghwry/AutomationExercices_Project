@@ -33,7 +33,6 @@ public class TestNGListeners implements IExecutionListener, IInvokedMethodListen
         LogsManager.Info("Properties files loaded successfully");
         AllureEnvironmentManager.setEnvironmentVariables();
         LogsManager.Info("Allure environment information set successfully");
-        //here can i setup data base  and can load the table we lw bageb data mn tables ba7otha fe json files
     }
 
 

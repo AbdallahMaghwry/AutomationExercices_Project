@@ -17,7 +17,6 @@ public class RegisterTestAPI extends BaseTest {
 
     @Test
     public void CreateAccount(){
-        //By Using Api layer for make create account faster and more stable then using UI layer
         new UserManagementAPI().createRegisterUserAccount
                         (
                                 testData.GetJsonData("name"),

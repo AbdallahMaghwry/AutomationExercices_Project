@@ -17,7 +17,6 @@ import static com.automationexercices.utils.report.AllureConstants.RESULTS_HISTO
 
 public class AllureReportGenerator {
     //Generate Allure report
-    //--single-file - generate single file report
     public static void generateReports(boolean isSingleFile) {
         Path outputFolder = isSingleFile ? AllureConstants.REPORT_PATH : AllureConstants.FULL_REPORT_PATH;
         List<String> command = new ArrayList<>(List.of(
@@ -55,7 +54,7 @@ public class AllureReportGenerator {
             case MAC, LINUX -> TerminalUtils.executeTerminalCommand("open", reportPath.toString());
             default -> LogsManager.Warn("Opening Allure Report is not supported on this OS.");
         }
-        LogsManager.Info("Opened Allureeee Report: " + reportPath.toString());
+        LogsManager.Info("Opened Allure Report: " + reportPath.toString());
     }
 
     //copy history folder to results folder

@@ -29,12 +29,11 @@ public class WaitManager {
 
     private ArrayList<Class<? extends Exception>> ignoredExceptions()
     {
-        //عملت اراي اوف ليست عشان ابقي ابعتها لل ignoreAll انا هنا بقول ان الكلاس دا جي من حته معينه و الحته المعينه دي بتاكسنيند الاكسيبشين
         ArrayList<Class<? extends Exception>> exceptions = new ArrayList<>();//  (?) دي معناها template
-        exceptions.add(NoSuchElementException.class);//استثناء عدم وجود العنصر
-        exceptions.add(StaleElementReferenceException.class);//استثناء مرجع العنصر القديم
-        exceptions.add(ElementNotInteractableException.class);//أستثناء عدم امكانيه التفاعل مع العنصر
-        exceptions.add(ElementClickInterceptedException.class); //استثناء تم اعتراض النقر علي العنصر
+        exceptions.add(NoSuchElementException.class);
+        exceptions.add(StaleElementReferenceException.class);
+        exceptions.add(ElementNotInteractableException.class);
+        exceptions.add(ElementClickInterceptedException.class);
         return exceptions;
     }
 

@@ -75,7 +75,6 @@ public class ChromeFactory extends AbstractDriver{
         return options;
     }
 
-//هنا اول ما عملت اكستيند للابستركشن درايفر جابلي هنا اني استخدم الفانكشن الي اسمها كريت درايفر الي هي اصلا موجوده هناك في الابستركشن و منها عملت return اني افتح براوز بالاوبشينز الي انا حاططتها و كمان عامل ريتتن كدا عشانpublic WebDriver
     @Override
     public WebDriver CreateDriver() {
 

@@ -38,7 +38,6 @@ public class AllureBinaryManager {
         try {
             String version = LazyHolder.VERSION;
             Path extractionDir = Paths.get(AllureConstants.EXTRACTION_DIR.toString(), "allure-" + version);
-            //c:\Users\hussi\.m2\repository\allure\allure-2.34.1
             if (Files.exists(extractionDir)) {
                 LogsManager.Info("Allure binaries already exist.");
                 return;
@@ -67,7 +66,7 @@ public class AllureBinaryManager {
     }
     public static Path getExecutable() {
         String version = LazyHolder.VERSION;
-        //C:\Users\hussi\.m2\repository\allure\allure-2.34.1\bin
+
         Path binaryPath = Paths.get(AllureConstants.EXTRACTION_DIR.toString(), "allure-" + version, "bin", "allure");
         return OSUtils.GetCurrentOS() == OSUtils.OS.WINDOWS
                 ? binaryPath.resolveSibling(binaryPath.getFileName() + ".bat")
@@ -79,7 +78,7 @@ public class AllureBinaryManager {
         try {
             //https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.34.1/allure-commandline-2.34.1.zip
             String url = AllureConstants.ALLURE_ZIP_BASE_URL + version + "/allure-commandline-" + version + ".zip";
-            //C:\Users\hussi\.m2\repository\allure
+
             Path zipFile = Paths.get(AllureConstants.EXTRACTION_DIR.toString(), "allure-" + version + ".zip");
             if (!Files.exists(zipFile)) {
                 Files.createDirectories(AllureConstants.EXTRACTION_DIR);

@@ -46,7 +46,7 @@ public class Validation extends BaseAssertion {
             LogsManager.Error("Soft assertion failed: " + e.getMessage());
             result.setStatus(ITestResult.FAILURE);
             result.setThrowable(e); // set the exception as the cause of failure
-           // throw e; // rethrow the assertion error to fail the test
+
         }
         finally {
            softAssert = new SoftAssert(); // reset the SoftAssert for reuse

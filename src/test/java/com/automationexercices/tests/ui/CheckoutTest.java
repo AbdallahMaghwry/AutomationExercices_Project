@@ -26,7 +26,6 @@ public class CheckoutTest extends BaseTest {
     String timestamp = TimeManager.GetCurrentTimeStamp();
     @Test
     public void CreateAccount(){
-        //By Using Api layer for make create account faster and more stable then using UI layer
         new UserManagementAPI().createRegisterUserAccount
                         (
                            testData.GetJsonData("name"),

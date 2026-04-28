@@ -10,8 +10,7 @@ public class LogsManager {
     public static Logger logger(){
         return LogManager.getLogger(Thread.currentThread().getStackTrace()[3].getClassName());
     }
-    //String mulitiple parameters to be logged in one line with space between them
-    //info("error massage"+" " +e.getmassage()); -> info("error massage", e.getmassage());
+
     public static void Info(String... message){
         logger().info(String.join(" ", message));
     }

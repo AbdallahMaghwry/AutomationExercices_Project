@@ -13,22 +13,22 @@ import com.automationexercices.utils.dataReader.PropertyReader;
 
 public class GUIDriver {
 
-    private final  String browser = PropertyReader.GetProperty("browserType"); // هنا انا بجيب البراوز الي هاجري عليه من البروبرتيز عشان اقدر استخدمه في ال سويتش الي جاي بعد كدا
+    private final  String browser = PropertyReader.GetProperty("browserType");
 
-    private  ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>(); // دا الي بعرفو عشان استخدمو مكان كلمه driver
+    private  ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     public   GUIDriver () {
-        Browsers BrowserType = Browsers.valueOf(browser.toUpperCase());//هنا انا بستخدم ال valueOf عشان اخد ال string الي جاي من البروبرتيز و احولها ل enum عشان اقدر استخدمها في السويتش
+        Browsers BrowserType = Browsers.valueOf(browser.toUpperCase());
         LogsManager.Info("Browser Type: " + BrowserType);
         AbstractDriver abstractDriver = BrowserType.getDriverFactory();
-        WebDriver driver = ThreadGuard.protect(abstractDriver.CreateDriver());//createDriver  هو هنا بناء علي البراوز الي بعتو وقت الرن تايم هو هاينده سواء كروم او ايدج وليه اتعرف بعد الدوت عشان فوق في السويتش انا نادي علي الي الابستركت درايفر
+        WebDriver driver = ThreadGuard.protect(abstractDriver.CreateDriver());
         driverThreadLocal.set(driver);
 
     }
 
     public  WebDriver Get()
      {
-        return driverThreadLocal.get();//و عشان اشغل الدرايفر هاعملو return بالثريد لوكل عشان انا مستخدم ثريد ديلوقتي
+        return driverThreadLocal.get();
     }
     public ElementActions element(){
         return new ElementActions(Get());

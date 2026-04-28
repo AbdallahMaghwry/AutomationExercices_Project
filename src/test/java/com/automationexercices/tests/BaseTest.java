@@ -13,6 +13,6 @@ protected JsonReader testData;
 
     @Override
     public WebDriver getWebDriver() {
-        return driver.Get();//Get 2le btrg3ly webDriver
+        return driver.Get();
     }
 }

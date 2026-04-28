@@ -20,4 +20,3 @@ public class TerminalUtils {
 }
 
 
-    //TerminalUtils class is a utility class that provides a method to execute terminal commands. like allure generate 3azy excute 2l terminal commend as a coded
