@@ -1,14 +1,20 @@
 package com.automationexercices.drivers;
 
 import com.automationexercices.utils.Logs.LogsManager;
+import com.automationexercices.utils.OSUtils;
 import com.automationexercices.utils.dataReader.PropertyReader;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ChromeFactory extends AbstractDriver{
@@ -23,6 +29,35 @@ public class ChromeFactory extends AbstractDriver{
         options.addArguments("--disable-infobars");
         options.setAcceptInsecureCerts(true);
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
+        Map<String, Object> prefs = new HashMap<>();
+        String userDir = System.getProperty("user.dir");
+        String downloadPath;
+        switch (OSUtils.GetCurrentOS())
+        {
+            case WINDOWS ->  downloadPath = userDir + "\\src\\test\\resources\\downloads";
+            case MAC, LINUX -> downloadPath = userDir +
+                    File.separator +
+                    "src"
+                    +File.separator+
+                    "test"+
+                    File.separator+
+                    "resources"+
+                    File.separator+
+                    "downloads";
+            default -> {
+                LogsManager.Error("Unsupported operating system: " + OSUtils.GetCurrentOS());
+                throw new RuntimeException("Unsupported operating system: " + OSUtils.GetCurrentOS());
+            }
+        }
+        prefs.put("profile.default_content_settings.popups", 0);
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("download.default_directory",downloadPath);
+        options.setExperimentalOption("prefs", prefs);
+        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+        options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+        options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+        options.setCapability(CapabilityType.ENABLE_DOWNLOADS, true);
 
         if (PropertyReader.GetProperty("extensions").equalsIgnoreCase("enabled"))
             options.addExtensions(haramBlurExtension);

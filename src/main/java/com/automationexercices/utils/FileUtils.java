@@ -6,6 +6,7 @@ import com.automationexercices.utils.dataReader.PropertyReader;
 import java.io.File;
 import java.io.IOException;
 
+import static com.automationexercices.utils.report.AllureConstants.USER_DIR;
 import static org.apache.commons.io.FileUtils.copyFile;
 
 public class FileUtils {
@@ -74,6 +75,30 @@ private static final String DIR_PATH = PropertyReader.GetProperty("user.dir")+Fi
         String filePath = System.getProperty("user.dir")+File.separator + "/src/test/resources/downloads/" ;
         File file = new File(filePath+ filename);
         return file.exists();
+    }
+
+    public static boolean isFileExist (String FileName , int NumberofRetries)
+    {
+        boolean isFileExist = false;
+        int retries = 0;
+        while (retries < NumberofRetries) {
+            try{
+                String filepath = USER_DIR +"/src/test/resources/downloads/";
+                isFileExist = (new File(filepath + FileName)).getAbsoluteFile().exists();
+            }catch (Exception e){
+                LogsManager.Error("Error checking file existence: " + e.getMessage());
+            }
+            if (!isFileExist)
+            {
+                try{
+                    Thread.sleep(500); // Wait for half second before retrying
+                }catch (Exception e){
+                    LogsManager.Error("Error waiting for file: " + e.getMessage());
+                }
+            }
+            retries++;
+        }
+        return isFileExist;
     }
 
 }
